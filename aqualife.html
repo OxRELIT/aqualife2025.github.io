@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0ea5e9">
+    <style>
+         :root {
+            --bg: #f0fbff;
+            --card: #ffffff;
+            --ink: #06253a;
+            --muted: #5b7a94;
+            --brand: #12aee6;
+            --brand-2: #1fd7e7;
+            --ring: #b9ecff;
+            --border: #0e54a1;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        html,
+        body {
+            height: 100%;
+        }
+        
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Noto Sans Thai', 'Noto Sans', sans-serif;
+            color: var(--ink);
+            background: radial-gradient(1000px 280px at 50% -120px, #c7f5ff 0%, var(--bg) 60%), var(--bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Aqua header with waves */
+        
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(8px);
+        }
+        
+        .wrap {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 12px 16px;
+        }
+        
+        .banner {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .heroBrand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: conic-gradient(from 0deg, var(--brand), var(--brand-2));
+            box-shadow: 0 4px 10px rgba(18, 174, 230, 0.35);
+        }
+        
+        .title {
+            font-weight: 900;
+            letter-spacing: -0.01em;
+        }
+        
+        .badge {
+            margin-left: auto;
+            font-size: 12px;
+            background: #e6fbff;
+            color: #0777a6;
+            padding: 2px 8px;
+            border-radius: 999px;
+        }
+        
+        .langToggle {
+            margin-left: 8px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 4px 8px;
+            font-size: 12px;
+            background: #fff;
+            cursor: pointer;
+        }
+        /* Decorative wave */
+        
+        .wave {
+            position: relative;
+            height: 44px;
+            overflow: hidden;
+        }
+        
+        .wave::before,
+        .wave::after {
+            content: '';
+            position: absolute;
+            left: -10%;
+            right: -10%;
+            height: 120%;
+            background: radial-gradient(100% 60% at 50% 30%, rgba(18, 174, 230, 0.20) 0%, rgba(31, 215, 231, 0.10) 60%, transparent 70%);
+            transform: translateY(10px);
+        }
+        
+        .wave::after {
+            transform: translateY(18px);
+            filter: blur(6px);
+            opacity: 0.7;
+        }
+        
+        .search {
+            display: flex;
+            gap: 8px;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            border-radius: 16px;
+            box-shadow: 0 6px 16px rgba(2, 132, 199, 0.06);
+        }
+        
+        .search input {
+            flex: 1;
+            border: 0;
+            outline: 0;
+            background: transparent;
+            font-size: 16px;
+        }
+        
+        .chips {
+            display: flex;
+            gap: 8px;
+            overflow: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+        }
+        
+        .chips::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .chip {
+            white-space: nowrap;
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: #fff;
+            font-size: 14px;
+            color: #0f172a;
+            cursor: pointer;
+        }
+        
+        .chip.active {
+            background: var(--brand);
+            color: #fff;
+            border-color: var(--brand);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        
+        @media (min-width: 560px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .card {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--card);
+            box-shadow: 0 10px 24px rgba(2, 132, 199, 0.08);
+            cursor: pointer;
+        }
+        
+        .thumb {
+            aspect-ratio: 16/9;
+            background: #eaf6ff;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .card .pad {
+            padding: 10px 12px;
+        }
+        
+        .cat {
+            color: #0777a6;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: .02em;
+            text-transform: uppercase;
+        }
+        
+        .name {
+            font-weight: 800;
+            margin-top: 4px;
+            line-height: 1.2;
+        }
+        
+        .sum {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 4px;
+        }
+        
+        .latin {
+            color: #7ea1b7;
+            font-size: 12px;
+            margin-top: 6px;
+            font-style: italic;
+        }
+        
+        .empty {
+            text-align: center;
+            color: var(--muted);
+            padding: 48px 12px;
+        }
+        
+        .bottom {
+            position: fixed;
+            inset-inline: 0;
+            bottom: 0;
+            background: #fff;
+            border-top: 1px solid var(--border);
+        }
+        
+        .tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .tab {
+            text-align: center;
+            padding: 12px 8px;
+            font-size: 13px;
+            color: #475569;
+        }
+        
+        .tab.active {
+            color: #0f172a;
+            font-weight: 700;
+        }
+        
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
+        dialog {
+            border: 0;
+            padding: 0;
+            width: min(760px, 100%);
+            margin: auto;
+            border-radius: 16px 16px 0 0;
+            position: fixed;
+            inset: auto 0 0 0;
+        }
+        
+        .sheet {
+            background: #fff;
+            border-radius: 16px 16px 0 0;
+            max-height: 78dvh;
+            overflow: auto;
+        }
+        
+        .sheet .hero {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: #eaf6ff;
+        }
+        
+        .sheet .content {
+            padding: 14px 16px 16px;
+        }
+        
+        .sheet h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+        
+        .sheet .x {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 8px;
+            cursor: pointer;
+        }
+        
+        .btn {
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-decoration: none;
+            color: #0f172a;
+        }
+        
+        .muted {
+            color: var(--muted);
+            font-size: 13px;
+        }
+        
+        .qr-hint {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="wrap">
+            <a href="https://www.facebook.com/CentralHatyaiFanpage/" target="_blank" rel="noopener noreferrer">
+                <img src="logoSongkhlaAqualife2025-02.png" alt="Songkhla AquaLife 2025" class="banner" />
+            </a>
+        </div>
+        <div class="wrap heroBrand">
+            <div class="logo" aria-hidden="true"></div>
+            <div class="title" data-i18n="brand">Songkhla AquaLife</div>
+            <span class="badge" data-i18n="badge">QR • Offline</span>
+            <button class="langToggle" id="langBtn">EN</button>
+        </div>
+        <div class="wave" aria-hidden="true"></div>
+    </header>
+
+    <main class="wrap" style="padding-bottom:92px;">
+        <div class="search" role="search">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="#5b7a94" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <input id="q" placeholder="ค้นหา: ไทย / อังกฤษ / วิทยาศาสตร์" />
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M7 12h10M10 17h4" stroke="#5b7a94" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+
+        <section style="margin-top:10px;">
+            <div id="chips" class="chips"></div>
+        </section>
+
+        <section style="margin-top:10px;">
+            <div id="grid" class="grid"></div>
+            <div id="empty" class="empty" style="display:none;" data-i18n="no_results_th">ไม่พบรายการที่ตรงกับการค้นหา</div>
+        </section>
+
+        <section style="margin-top:18px;">
+            <h3 style="margin:0 0 6px 0; font-size:16px;" data-i18n="scan_title_th">สแกนด้วยคิวอาร์ (QR) ได้เลย</h3>
+            <div class="muted" data-i18n="scan_desc_th">โฮสต์ไฟล์นี้แบบสแตติก (เช่น GitHub Pages / Netlify) แล้วสร้าง QR ชี้มา ยังใช้งานได้โดยไม่ต้องมีเซิร์ฟเวอร์หรือฐานข้อมูล</div>
+            <div class="qr-hint" data-i18n="scan_hint_th">เคล็ดลับ: เปิดใช้ Service Worker เพื่อแคชหน้าเว็บสำหรับใช้งานแบบออฟไลน์หลังจากเข้าใช้งานครั้งแรก</div>
+        </section>
+    </main>
+
+    <nav class="bottom">
+        <div class="wrap tabs">
+            <div class="tab active" data-i18n="tab_home_th">หน้าแรก</div>
+            <div class="tab" data-i18n="tab_cat_th">หมวดหมู่</div>
+            <div class="tab" data-i18n="tab_info_th">ข้อมูลผู้เยี่ยมชม</div>
+        </div>
+    </nav>
+
+    <dialog id="sheet">
+        <div class="sheet">
+            <button class="x" onclick="closeSheet()" aria-label="Close / ปิดรายละเอียด">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M6 18 18 6" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+            <img id="sheetImg" class="hero" alt="ภาพตัวอย่าง" />
+            <div class="content">
+                <div class="muted" id="sheetCat"></div>
+                <h2 id="sheetName"></h2>
+                <div class="muted" id="sheetLatin" style="font-style:italic;"></div>
+                <p id="sheetSum" style="margin-top:8px;"></p>
+                <div id="videoWrap" style="margin-top:10px;"></div>
+            </div>
+        </div>
+    </dialog>
+
+    <script>
+        // --- Data (embedded) ---
+        const DATA = [{
+            "id": 1,
+            "th": "ปลากะรัง (ปลาหมอทะเล)",
+            "en": "Giant grouper",
+            "sci": "Epinephelus lanceolatus",
+            "cat": "ปลาทะเล",
+            "summary_th": "ปลากะรังขนาดใหญ่แห่งอินโด–แปซิฟิก",
+            "detail_th": "โตได้กว่า 2.5 ม. และหนักหลายร้อยกก. พบแนวปะการังและปากน้ำในน่านน้ำไทย",
+            "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGY6QhXgOJJEEY938g55JzNcxoLAcahxUixFDaNMD6C9AfL3iPJHrvl8lCB2kRthYwUSOddSEgluFjI7r07L6Y7ChjaUh1C5pJhS460aGEMA",
+            "yt": "https://www.youtube.com/watch?v=jE4I7t3m3mU",
+            "note_th": "",
+            "summary_en": "ปลากะรังขนาดใหญ่แห่งอินโด–แปซิฟิก",
+            "detail_en": "โตได้กว่า 2.5 ม. และหนักหลายร้อยกก. พบแนวปะการังและปากน้ำในน่านน้ำไทย",
+            "note_en": "",
+            "img_embed": ""
+        }, {
+            "id": 2,
+            "th": "ปลาโนรีเกล็ด",
+            "en": "Scalefin anthias",
+            "sci": "Pseudanthias squamipinnis",
+            "cat": "ปลาทะเล",
+            "summary_th": "ปลาสีส้มรวมฝูงตามแนวปะการัง",
+            "detail_th": "ปลากินแพลงก์ตอน พบแพร่หลายเขตอินโด–แปซิฟิก",
+            "img_url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTOfYxAc787oIokAutL5dC8i96KMdVz33Eyz65Z7u6c2j0hPRbQZC_ZMjLWufDCUXYxSCCTxNUMvdkwhLNcCDXPv-LiwYXkKjtM48KhLuX7Zg",
+            "yt": "https://www.youtube.com/watch?v=5UNyZbTxsYc",
+            "note_th": "",
+            "summary_en": "ปลาสีส้มรวมฝูงตามแนวปะการัง",
+            "detail_en": "ปลากินแพลงก์ตอน พบแพร่หลายเขตอินโด–แปซิฟิก",
+            "note_en": "",
+            "img_embed": ""
+        }, {
+            "id": 3,
+            "th": "ปลาผีเสื้อแพนด้า",
+            "en": "Panda butterflyfish",
+            "sci": "Chaetodon adiergastos",
+            "cat": "ปลาทะเล",
+            "summary_th": "ผีเสื้อทะเลลายขาวดำคล้ายแพนด้า",
+            "detail_th": "อาศัยแนวปะการังทะเลฟิลิปปินส์–อินโดนีเซีย",
+            "img_url": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRW636pVId1eCnuPVgl0ffJ71Qd1jZKuR78rBMPkeKzpasnPvB9kKBGpUDCaZaeGzbBVA60phcbGPyJsTyzqQvU2jE8AC54As-hKQp8rfdWBA",
+            "yt": "https://www.youtube.com/watch?v=CrYv3uhKToA",
+            "note_th": "",
+            "summary_en": "ผีเสื้อทะเลลายขาวดำคล้ายแพนด้า",
+            "detail_en": "อาศัยแนวปะการังทะเลฟิลิปปินส์–อินโดนีเซีย",
+            "note_en": "",
+            "img_embed": ""
+        }, {
+            "id": 4,
+            "th": "ปลาเอ็มเพอเรอร์ลายลูก (วัยเด็ก)",
+            "en": "Emperor angelfish (juvenile)",
+            "sci": "Pomacanthus imperator (juvenile)",
+            "cat": "ปลาทะเล",
+            "summary_th": "นางฟ้าทะเลลายวงน้ำเงินในวัยเด็ก",
+            "detail_th": "เมื่อโตเต็มวัยจะเปลี่ยนเป็นลายเหลือง–น้ำเงินพาดลำตัว",
+            "img_url": "data:image/jpeg;base64,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",
+            "yt": "https://www.youtube.com/watch?v=5oG8eCwqBk4",
+            "note_th": "",
+            "summary_en": "นางฟ้าทะเลลายวงน้ำเงินในวัยเด็ก",
+            "detail_en": "เมื่อโตเต็มวัยจะเปลี่ยนเป็นลายเหลือง–น้ำเงินพาดลำตัว",
+            "note_en": "",
+            "img_embed": ""
+        }, {
+            "id": 5,
+            "th": "ปลาผีเสื้อขอบทอง",
+            "en": "Threadfin butterflyfish (likely)",
+            "sci": "Chaetodon auriga",
+            "cat": "ปลาทะเล",
+            "summary_th": "ผีเสื้อทะเลสีเหลือง ครีบหลังมีเส้นยาว",
+            "detail_th": "ชื่อตลาดไทย 'ขอบทอง' มักใช้กับ C. auriga ต้องยืนยันการใช้ในพื้นที่",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/1/15/Chaetodon_auriga_2.jpg",
+            "yt": "https://www.youtube.com/watch?v=7hWzF2sR1nQ",
+            "note_th": "⚠️ ตรวจชื่อสามัญไทยให้ชัด",
+            "summary_en": "ผีเสื้อทะเลสีเหลือง ครีบหลังมีเส้นยาว",
+            "detail_en": "ชื่อตลาดไทย 'ขอบทอง' มักใช้กับ C. auriga ต้องยืนยันการใช้ในพื้นที่",
+            "note_en": "⚠️ ตรวจชื่อสามัญไทยให้ชัด",
+            "img_embed": ""
+        }, {
+            "id": 6,
+            "th": "ปลาผีเสื้อพระจันทร์",
+            "en": "Raccoon butterflyfish",
+            "sci": "Chaetodon lunula",
+            "cat": "ปลาทะเล",
+            "summary_th": "ผีเสื้อหน้ากาก แถบดำผ่านตา",
+            "detail_th": "พบแนวปะการังน้ำตื้น กินสัตว์ไม่มีกระดูกเล็ก ๆ",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Chaetodon_lunula_2.jpg",
+            "yt": "https://www.youtube.com/watch?v=6Q8t4o3E4n4",
+            "note_th": "",
+            "summary_en": "ผีเสื้อหน้ากาก แถบดำผ่านตา",
+            "detail_en": "พบแนวปะการังน้ำตื้น กินสัตว์ไม่มีกระดูกเล็ก ๆ",
+            "note_en": "",
+            "img_embed": ""
+        }, {
+            "id": 7,
+            "th": "ปลาผีเสื้อเคนนี่",
+            "en": "Klein’s butterflyfish",
+            "sci": "Chaetodon kleinii",
+            "cat": "ปลาทะเล",
+            "summary_th": "สีเหลืองน้ำตาล เลี้ยงง่าย",
+            "detail_th": "กระจายพันธุ์กว้างในเขตร้อนอินโด–แปซิฟิก",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/5/58/Chaetodon_kleinii_01.jpg",
+            "yt": "https://www.youtube.com/watch?v=3bG3y1c5uXw",
+            "note_th": "",
+            "summary_en": "สีเหลืองน้ำตาล เลี้ยงง่าย",
+            "detail_en": "กระจายพันธุ์กว้างในเขตร้อนอินโด–แปซิฟิก",
+            "note_en": "",
+            "img_embed": ""
+        }, {
+            "id": 8,
+            "th": "สิงค์โปแองเจิ้ล",
+            "en": "Singapore angelfish",
+            "sci": "Chaetodontoplus mesoleucus",
+            "cat": "ปลาทะเล",
+            "summary_th": "นางฟ้าทะเลสีเหลือง–ดำ แถบขาวกลางตัว",
+            "detail_th": "พบในเอเชียตะวันออกเฉียงใต้ รวมไทย อินโด มาเลเซีย",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Chaetodontoplus_mesoleucus.jpg",
+            "yt": "https://www.youtube.com/watch?v=2m1nq9oC3Yc",
+            "note_th": "",
+            "summary_en": "นางฟ้าทะเลสีเหลือง–ดำ แถบขาวกลางตัว",
+            "detail_en": "พบในเอเชียตะวันออกเฉียงใต้ รวมไทย อินโด มาเลเซีย",
+            "note_en": "",
+            "img_embed": ""
+        }, {
+            "id": 9,
+            "th": "ปลาพาวเดอร์บลูแทงค์",
+            "en": "Powder blue tang",
+            "sci": "Acanthurus leucosternon",
+            "cat": "ปลาทะเล",
+            "summary_th": "ลำตัวฟ้า ปากดำ หางเหลือง",
+            "detail_th": "กินสาหร่าย พบมหาสมุทรอินเดีย",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Powder_blue_surgeonfish.jpg",
+            "yt": "https://www.youtube.com/watch?v=Y8L4GQ2sM5E",
+            "note_th": "",
+            "summary_en": "ลำตัวฟ้า ปากดำ หางเหลือง",
+            "detail_en": "กินสาหร่าย พบมหาสมุทรอินเดีย",
+            "note_en": "",
+            "img_embed": ""
+        }, {
+            "id": 10,
+            "th": "ปลาแก้วเหลือง",
+            "en": "Yellow wrasse (likely)",
+            "sci": "Halichoeres chrysus (needs confirm)",
+            "cat": "ปลาทะเล",
+            "summary_th": "ปลาทะเลสีเหลืองสด นิยมในตู้ทะเล",
+            "detail_th": "ชื่อไทย 'แก้วเหลือง' อาจหมายถึง wrasse สีเหลือง ต้องยืนยันชนิด",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Halichoeres_chrysus.jpg",
+            "yt": "",
+            "note_th": "⚠️ ต้องยืนยันชนิดไทย–วิทยาศาสตร์",
+            "summary_en": "ปลาทะเลสีเหลืองสด นิยมในตู้ทะเล",
+            "detail_en": "ชื่อไทย 'แก้วเหลือง' อาจหมายถึง wrasse สีเหลือง ต้องยืนยันชนิด",
+            "note_en": "⚠️ ต้องยืนยันชนิดไทย–วิทยาศาสตร์",
+            "img_embed": ""
+        }, {
+            "id": 11,
+            "th": "ปลาบราวแทงค์",
+            "en": "Brown surgeonfish",
+            "sci": "Acanthurus nigrofuscus",
+            "cat": "ปลาทะเล",
+            "summary_th": "ปลานวมุสสวยงาม สีเทาน้ำตาล",
+            "detail_th": "อยู่รวมฝูง กินสาหร่ายตามแนวปะการัง",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Acanthurus_nigrofuscus.jpg",
+            "yt": "https://www.youtube.com/watch?v=X_2yHdw7p9U",
+            "note_th": "",
+            "summary_en": "ปลานวมุสสวยงาม สีเทาน้ำตาล",
+            "detail_en": "อยู่รวมฝูง กินสาหร่ายตามแนวปะการัง",
+            "note_en": "",
+            "img_embed": ""
+        }, {
+            "id": 12,
+            "th": "ปลาหมอม่วง",
+            "en": "Koran angelfish",
+            "sci": "Pomacanthus semicirculatus",
+            "cat": "ปลาทะเล",
+            "summary_th": "นางฟ้าทะเลสีม่วง–เขียว วัยเด็กลายวง",
+            "detail_th": "พบบริเวณแนวปะการังอินโด–แปซิฟิก",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Pomacanthus_semicirculatus_adult.jpg",
+            "yt": "https://www.youtube.com/watch?v=LkQ2E4C8jIQ",
+            "note_th": "",
+            "summary_en": "นางฟ้าทะเลสีม่วง–เขียว วัยเด็กลายวง",
+            "detail_en": "พบบริเวณแนวปะการังอินโด–แปซิฟิก",
+            "note_en": "",
+            "img_embed": ""
+        }, {
+            "id": 13,
+            "th": "ปักเป้าหน้าหมาท้องเหลือง",
+            "en": "Yellowbelly dogface puffer",
+            "sci": "Arothron nigropunctatus (yellow morph)",
+            "cat": "ปลาทะเล",
+            "summary_th": "ปักเป้าทะเลท้องเหลือง หน้าเหมือนสุนัข",
+            "detail_th": "เป็นสีแปรปรวนของชนิดเดียวกับ dogface puffer",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Arothron_nigropunctatus.jpg",
+            "yt": "https://www.youtube.com/watch?v=2kx98l1YFeE",
+            "note_th": "",
+            "summary_en": "ปักเป้าทะเลท้องเหลือง หน้าเหมือนสุนัข",
+            "detail_en": "เป็นสีแปรปรวนของชนิดเดียวกับ dogface puffer",
+            "note_en": ""
+        }, {
+            "id": 14,
+            "th": "ปลาปักเป้าลาย",
+            "en": "Striped puffer (needs confirm)",
+            "sci": "Arothron hispidus (likely)",
+            "cat": "ปลาทะเล",
+            "summary_th": "ปักเป้าลายจุดตามลำตัว",
+            "detail_th": "ต้องยืนยันชนิดในพื้นที่แสดง",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Arothron_hispidus.jpg",
+            "yt": "https://www.youtube.com/watch?v=2Q3rVYvC8gA",
+            "note_th": "⚠️ ตรวจชนิดให้ชัด",
+            "summary_en": "ปักเป้าลายจุดตามลำตัว",
+            "detail_en": "ต้องยืนยันชนิดในพื้นที่แสดง",
+            "note_en": "⚠️ ตรวจชนิดให้ชัด"
+        }, {
+            "id": 15,
+            "th": "ปักเป้าหน้าหมา",
+            "en": "Dogface puffer",
+            "sci": "Arothron nigropunctatus",
+            "cat": "ปลาทะเล",
+            "summary_th": "ปักเป้าหน้าคล้ายสุนัข",
+            "detail_th": "นิยมในตู้ทะเล ขยายตัวโดยอมน้ำ/อากาศ",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Arothron_nigropunctatus.jpg",
+            "yt": "https://www.youtube.com/watch?v=2kx98l1YFeE",
+            "note_th": "",
+            "summary_en": "ปักเป้าหน้าคล้ายสุนัข",
+            "detail_en": "นิยมในตู้ทะเล ขยายตัวโดยอมน้ำ/อากาศ",
+            "note_en": ""
+        }, {
+            "id": 16,
+            "th": "ปลาปักเป้าเขา",
+            "en": "Longhorn cowfish",
+            "sci": "Lactoria cornuta",
+            "cat": "ปลาทะเล",
+            "summary_th": "ปลากล่องมีเขายื่นหน้า–หลัง",
+            "detail_th": "เมือกมีพิษเตตระโดโทซิน ควรจัดแสดงด้วยความระมัดระวัง",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Lactoria_cornuta.jpg",
+            "yt": "https://www.youtube.com/watch?v=3p7Kp6S4E5g",
+            "note_th": "",
+            "summary_en": "ปลากล่องมีเขายื่นหน้า–หลัง",
+            "detail_en": "เมือกมีพิษเตตระโดโทซิน ควรจัดแสดงด้วยความระมัดระวัง",
+            "note_en": ""
+        }, {
+            "id": 17,
+            "th": "ปลากดเหลือง",
+            "en": "Asian redtail catfish",
+            "sci": "Hemibagrus nemurus",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "ปลาเนื้ออ่อนพื้นบ้าน",
+            "detail_th": "พบแม่น้ำในอาเซียน เนื้ออร่อย นิยมบริโภค",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Hemibagrus_nemurus.jpg",
+            "yt": "https://www.youtube.com/watch?v=fj4p9N6gKsc",
+            "note_th": "",
+            "summary_en": "ปลาเนื้ออ่อนพื้นบ้าน",
+            "detail_en": "พบแม่น้ำในอาเซียน เนื้ออร่อย นิยมบริโภค",
+            "note_en": ""
+        }, {
+            "id": 18,
+            "th": "ปลาชะโอบ",
+            "en": "(ต้องยืนยันชื่อไทย)",
+            "sci": "",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "ชื่อสามัญไม่ชัดเจน",
+            "detail_th": "โปรดระบุชื่อวิทยาศาสตร์/ภาพ เพื่อยืนยันชนิด",
+            "img_url": "",
+            "yt": "",
+            "note_th": "⚠️ ต้องยืนยัน",
+            "summary_en": "ชื่อสามัญไม่ชัดเจน",
+            "detail_en": "โปรดระบุชื่อวิทยาศาสตร์/ภาพ เพื่อยืนยันชนิด",
+            "note_en": "⚠️ ต้องยืนยัน"
+        }, {
+            "id": 19,
+            "th": "กุ้งก้ามกราม",
+            "en": "Giant river prawn",
+            "sci": "Macrobrachium rosenbergii",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "กุ้งน้ำจืดเศรษฐกิจสำคัญของไทย",
+            "detail_th": "ก้ามผู้ยาวสีน้ำเงิน เลี้ยงแพร่หลาย",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/5/54/Macrobrachium_rosenbergii_male.jpg",
+            "yt": "https://www.youtube.com/watch?v=H3s7e0r_0Jo",
+            "note_th": "",
+            "summary_en": "กุ้งน้ำจืดเศรษฐกิจสำคัญของไทย",
+            "detail_en": "ก้ามผู้ยาวสีน้ำเงิน เลี้ยงแพร่หลาย",
+            "note_en": ""
+        }, {
+            "id": 20,
+            "th": "ปลาตะเพียนขาว",
+            "en": "Java barb",
+            "sci": "Barbonymus gonionotus",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "ปลาพื้นบ้าน นิยมเพาะเลี้ยง",
+            "detail_th": "กินพืช โตไว ใช้ทำปลาแปรรูป",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Barbonymus_gonionotus.jpg",
+            "yt": "https://www.youtube.com/watch?v=z4X4rUEk6dQ",
+            "note_th": "",
+            "summary_en": "ปลาพื้นบ้าน นิยมเพาะเลี้ยง",
+            "detail_en": "กินพืช โตไว ใช้ทำปลาแปรรูป",
+            "note_en": ""
+        }, {
+            "id": 21,
+            "th": "ปลาตะเพียนทอง",
+            "en": "Tinfoil barb",
+            "sci": "Barbonymus altus",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "เกล็ดเงินหางแดง–ทอง",
+            "detail_th": "ปลาขนาดใหญ่กว่าและใช้บริโภค/สวยงาม",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/3/37/Barbonymus_altus.jpg",
+            "yt": "https://www.youtube.com/watch?v=Hq_1pN2dXWQ",
+            "note_th": "",
+            "summary_en": "เกล็ดเงินหางแดง–ทอง",
+            "detail_en": "ปลาขนาดใหญ่กว่าและใช้บริโภค/สวยงาม",
+            "note_en": ""
+        }, {
+            "id": 22,
+            "th": "ปลากระแห",
+            "en": "Siamese mud carp",
+            "sci": "Henicorhynchus siamensis",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "ปลาเนื้อขาว ตัวเงินอมเหลือง",
+            "detail_th": "พบบริเวณโขง–เจ้าพระยา อาหารพื้นบ้าน",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Henicorhynchus_siamensis.jpg",
+            "yt": "https://www.youtube.com/watch?v=pOHGdKmcRkY",
+            "note_th": "",
+            "summary_en": "ปลาเนื้อขาว ตัวเงินอมเหลือง",
+            "detail_en": "พบบริเวณโขง–เจ้าพระยา อาหารพื้นบ้าน",
+            "note_en": ""
+        }, {
+            "id": 23,
+            "th": "ปลาแก้มช้ำ",
+            "en": "Big-eye barb (likely)",
+            "sci": "Cyclocheilichthys apogon",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "ปลากลุ่มตะเพียน แก้มอมชมพู",
+            "detail_th": "พบลุ่มน้ำเจ้าพระยา–แม่โขง",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Cyclocheilichthys_apogon.JPG",
+            "yt": "https://www.youtube.com/watch?v=C0b5rH4cKxM",
+            "note_th": "⚠️ ชื่อท้องถิ่นอาจสับสน",
+            "summary_en": "ปลากลุ่มตะเพียน แก้มอมชมพู",
+            "detail_en": "พบลุ่มน้ำเจ้าพระยา–แม่โขง",
+            "note_en": "⚠️ ชื่อท้องถิ่นอาจสับสน"
+        }, {
+            "id": 24,
+            "th": "ปลาสร้อยนกเขา",
+            "en": "False scissortail rasbora",
+            "sci": "Rasbora borapetensis",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "ปลาขนาดเล็ก สีเงินคาดดำ",
+            "detail_th": "พบหนองบึงและทุ่งนาในไทยและลาว",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Rasbora_borapetensis.jpg",
+            "yt": "https://www.youtube.com/watch?v=3wPj3q0_YeE",
+            "note_th": "",
+            "summary_en": "ปลาขนาดเล็ก สีเงินคาดดำ",
+            "detail_en": "พบหนองบึงและทุ่งนาในไทยและลาว",
+            "note_en": ""
+        }, {
+            "id": 25,
+            "th": "ปลาบู่ทราย",
+            "en": "Tank goby",
+            "sci": "Glossogobius giuris",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "ชอบพื้นทราย น้ำกร่อย–จืด",
+            "detail_th": "กระจายกว้างในเอเชียใต้–อาเซียน",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/3/39/Glossogobius_giuris.jpg",
+            "yt": "https://www.youtube.com/watch?v=2sA0cG4j6L0",
+            "note_th": "",
+            "summary_en": "ชอบพื้นทราย น้ำกร่อย–จืด",
+            "detail_en": "กระจายกว้างในเอเชียใต้–อาเซียน",
+            "note_en": ""
+        }, {
+            "id": 26,
+            "th": "พลวงชมพู",
+            "en": "Pink/Copper mahseer (needs confirm)",
+            "sci": "Neolissochilus sp.",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "ปลาตระกูลมหีเสียร์ (mahseer)",
+            "detail_th": "ต้องยืนยันชนิดแน่ชัดจากแหล่งที่พบ",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/1/18/Neolissochilus_hexagonolepis.jpg",
+            "yt": "",
+            "note_th": "⚠️ ต้องยืนยันชนิด",
+            "summary_en": "ปลาตระกูลมหีเสียร์ (mahseer)",
+            "detail_en": "ต้องยืนยันชนิดแน่ชัดจากแหล่งที่พบ",
+            "note_en": "⚠️ ต้องยืนยันชนิด"
+        }, {
+            "id": 27,
+            "th": "ปลาบ้า",
+            "en": "(ต้องยืนยันชื่อไทย)",
+            "sci": "",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "ชื่อท้องถิ่นใช้กว้าง อาจหมายถึงหลายชนิด",
+            "detail_th": "โปรดให้ชื่อวิทยาศาสตร์/ภาพอ้างอิง",
+            "img_url": "",
+            "yt": "",
+            "note_th": "⚠️ ต้องยืนยัน",
+            "summary_en": "ชื่อท้องถิ่นใช้กว้าง อาจหมายถึงหลายชนิด",
+            "detail_en": "โปรดให้ชื่อวิทยาศาสตร์/ภาพอ้างอิง",
+            "note_en": "⚠️ ต้องยืนยัน"
+        }, {
+            "id": 28,
+            "th": "ปลายี่สกเทศก์",
+            "en": "Mrigal carp",
+            "sci": "Cirrhinus mrigala",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "ปลาตะเพียนอินเดียนำเข้าเลี้ยง",
+            "detail_th": "นิยมเพาะเลี้ยงในเอเชียใต้–อาเซียน",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Cirrhinus_mrigala.jpg",
+            "yt": "https://www.youtube.com/watch?v=Vh7JkQ0e4lI",
+            "note_th": "",
+            "summary_en": "ปลาตะเพียนอินเดียนำเข้าเลี้ยง",
+            "detail_en": "นิยมเพาะเลี้ยงในเอเชียใต้–อาเซียน",
+            "note_en": ""
+        }, {
+            "id": 29,
+            "th": "ปลานิลจิตรลดา",
+            "en": "Nile tilapia (Chitralada)",
+            "sci": "Oreochromis niloticus",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "สายพันธุ์ปรับปรุงของไทย โตเร็ว",
+            "detail_th": "สำคัญต่อเศรษฐกิจและความมั่นคงอาหาร",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Oreochromis_niloticus.jpg",
+            "yt": "https://www.youtube.com/watch?v=z8cAj9L6gGc",
+            "note_th": "",
+            "summary_en": "สายพันธุ์ปรับปรุงของไทย โตเร็ว",
+            "detail_en": "สำคัญต่อเศรษฐกิจและความมั่นคงอาหาร",
+            "note_en": ""
+        }, {
+            "id": 30,
+            "th": "ปลานิลแดง",
+            "en": "Red tilapia (hybrid)",
+            "sci": "Oreochromis sp.",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "ปลาสีแดงจากการปรับปรุงพันธุ์",
+            "detail_th": "นิยมเลี้ยง เนื้อสีสวย",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Red_tilapia.jpg",
+            "yt": "https://www.youtube.com/watch?v=5v7JrZrQy2g",
+            "note_th": "",
+            "summary_en": "ปลาสีแดงจากการปรับปรุงพันธุ์",
+            "detail_en": "นิยมเลี้ยง เนื้อสีสวย",
+            "note_en": ""
+        }, {
+            "id": 31,
+            "th": "ปลาดุกลำพัน",
+            "en": "Walking catfish",
+            "sci": "Clarias batrachus",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "ปลาดุกพื้นบ้าน เดินบนบกได้ระยะสั้น",
+            "detail_th": "ทนทาน เลี้ยงง่าย นิยมบริโภค",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Clarias_batrachus.jpg",
+            "yt": "https://www.youtube.com/watch?v=0wQKz_2v6nI",
+            "note_th": "",
+            "summary_en": "ปลาดุกพื้นบ้าน เดินบนบกได้ระยะสั้น",
+            "detail_en": "ทนทาน เลี้ยงง่าย นิยมบริโภค",
+            "note_en": ""
+        }, {
+            "id": 32,
+            "th": "ปลาดุกลำพัน (ซ้ำ)",
+            "en": "Walking catfish",
+            "sci": "Clarias batrachus",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "ระบุร่วมกับรายการก่อนหน้า",
+            "detail_th": "คงไว้เพื่อให้ตรงกับลิสต์ผู้ใช้",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Clarias_batrachus.jpg",
+            "yt": "",
+            "note_th": "(ซ้ำจากรายการก่อน)",
+            "summary_en": "ระบุร่วมกับรายการก่อนหน้า",
+            "detail_en": "คงไว้เพื่อให้ตรงกับลิสต์ผู้ใช้",
+            "note_en": "(ซ้ำจากรายการก่อน)"
+        }, {
+            "id": 33,
+            "th": "ปลาแขยงนวล",
+            "en": "Mystus sp. (needs confirm)",
+            "sci": "Mystus sp.",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "ปลาแขยงกลุ่มหนวดแมว",
+            "detail_th": "ต้องระบุชนิดที่แน่ชัด (เช่น M. micracanthus)",
+            "img_url": "",
+            "yt": "",
+            "note_th": "⚠️ ต้องยืนยันชนิด",
+            "summary_en": "ปลาแขยงกลุ่มหนวดแมว",
+            "detail_en": "ต้องระบุชนิดที่แน่ชัด (เช่น M. micracanthus)",
+            "note_en": "⚠️ ต้องยืนยันชนิด"
+        }, {
+            "id": 34,
+            "th": "ปลาอีกง",
+            "en": "(ต้องยืนยันชื่อไทย)",
+            "sci": "",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "อาจเป็นปลากด/ปลาเค้าตามท้องถิ่น",
+            "detail_th": "โปรดแนบรูปหรือพื้นที่พบเพื่อยืนยัน",
+            "img_url": "",
+            "yt": "",
+            "note_th": "⚠️ ต้องยืนยัน",
+            "summary_en": "อาจเป็นปลากด/ปลาเค้าตามท้องถิ่น",
+            "detail_en": "โปรดแนบรูปหรือพื้นที่พบเพื่อยืนยัน",
+            "note_en": "⚠️ ต้องยืนยัน"
+        }, {
+            "id": 35,
+            "th": "ปลาดุกอุย",
+            "en": "Striped catfish",
+            "sci": "Pangasianodon hypophthalmus",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "ปลาดุกเลี้ยงเศรษฐกิจ โตเร็ว",
+            "detail_th": "เลี้ยงมากในไทย–เวียดนาม",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Pangasianodon_hypophthalmus_Prague_2011_1.jpg",
+            "yt": "https://www.youtube.com/watch?v=kCj1JjOAgM0",
+            "note_th": "",
+            "summary_en": "ปลาดุกเลี้ยงเศรษฐกิจ โตเร็ว",
+            "detail_en": "เลี้ยงมากในไทย–เวียดนาม",
+            "note_en": ""
+        }, {
+            "id": 36,
+            "th": "ปลาหมอไทย",
+            "en": "Snakeskin gourami",
+            "sci": "Trichopodus pectoralis",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "ปลาเศรษฐกิจ ทำปลาแห้ง",
+            "detail_th": "เลี้ยงง่าย กระจายทั่วไทย",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Trichopodus_pectoralis.jpg",
+            "yt": "https://www.youtube.com/watch?v=0KjL8b2d8mY",
+            "note_th": "",
+            "summary_en": "ปลาเศรษฐกิจ ทำปลาแห้ง",
+            "detail_en": "เลี้ยงง่าย กระจายทั่วไทย",
+            "note_en": ""
+        }, {
+            "id": 37,
+            "th": "ปลาบึก",
+            "en": "Mekong giant catfish",
+            "sci": "Pangasianodon gigas",
+            "cat": "ปลาน้ำจืด",
+            "summary_th": "ปลายักษ์แม่น้ำโขง ใกล้สูญพันธุ์",
+            "detail_th": "อนุรักษ์สำคัญของลุ่มน้ำโขง",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Mekong_giant_catfish_2005.jpg",
+            "yt": "https://www.youtube.com/watch?v=SzR79U2vMHo",
+            "note_th": "",
+            "summary_en": "ปลายักษ์แม่น้ำโขง ใกล้สูญพันธุ์",
+            "detail_en": "อนุรักษ์สำคัญของลุ่มน้ำโขง",
+            "note_en": ""
+        }, {
+            "id": 38,
+            "th": "ปูอลาสก้า (ปูคิงแดง)",
+            "en": "Red king crab",
+            "sci": "Paralithodes camtschaticus",
+            "cat": "สัตว์น้ำทะเลอื่น ๆ",
+            "summary_th": "ปูทะเลขนาดใหญ่จากทะเลแบริ่ง–อลาสกา",
+            "detail_th": "ทรัพยากรประมงสำคัญของเขตหนาว",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/0/04/Red_king_crab.jpg",
+            "yt": "https://www.youtube.com/watch?v=7Zb3l9x3pRw",
+            "note_th": "",
+            "summary_en": "ปูทะเลขนาดใหญ่จากทะเลแบริ่ง–อลาสกา",
+            "detail_en": "ทรัพยากรประมงสำคัญของเขตหนาว",
+            "note_en": ""
+        }, {
+            "id": 39,
+            "th": "กุ้งลอปเตอร์",
+            "en": "American lobster",
+            "sci": "Homarus americanus",
+            "cat": "สัตว์น้ำทะเลอื่น ๆ",
+            "summary_th": "กุ้งก้ามใหญ่แอตแลนติกเหนือ",
+            "detail_th": "ชนิดเศรษฐกิจสำคัญ",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Homarus_americanus.jpg",
+            "yt": "https://www.youtube.com/watch?v=k4Q6U3B2W1M",
+            "note_th": "",
+            "summary_en": "กุ้งก้ามใหญ่แอตแลนติกเหนือ",
+            "detail_en": "ชนิดเศรษฐกิจสำคัญ",
+            "note_en": ""
+        }, {
+            "id": 40,
+            "th": "กุ้งมังกร 7 สี",
+            "en": "Painted spiny lobster",
+            "sci": "Panulirus versicolor",
+            "cat": "สัตว์น้ำทะเลอื่น ๆ",
+            "summary_th": "ลวดลายสีสด สวยงาม",
+            "detail_th": "พบแนวปะการังอินโด–แปซิฟิก รวมอันดามัน",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Panulirus_versicolor2.jpg",
+            "yt": "https://www.youtube.com/watch?v=8w8q3k1b3Vg",
+            "note_th": "",
+            "summary_en": "ลวดลายสีสด สวยงาม",
+            "detail_en": "พบแนวปะการังอินโด–แปซิฟิก รวมอันดามัน",
+            "note_en": ""
+        }, {
+            "id": 41,
+            "th": "แมงกะพรุนเจลลี่บับเบิล",
+            "en": "Jelly blubber",
+            "sci": "Catostylus mosaicus",
+            "cat": "สัตว์น้ำทะเลอื่น ๆ",
+            "summary_th": "หมวกหนา สีฟ้า–ม่วง",
+            "detail_th": "พบอ่าวตื้นออสเตรเลียตะวันออก",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Catostylus_mosaicus.jpg",
+            "yt": "https://www.youtube.com/watch?v=6QmX3qkYl7A",
+            "note_th": "",
+            "summary_en": "หมวกหนา สีฟ้า–ม่วง",
+            "detail_en": "พบอ่าวตื้นออสเตรเลียตะวันออก",
+            "note_en": ""
+        }, {
+            "id": 42,
+            "th": "แมงกะพรุนพระจันทร์",
+            "en": "Moon jelly",
+            "sci": "Aurelia aurita",
+            "cat": "สัตว์น้ำทะเลอื่น ๆ",
+            "summary_th": "โปร่งใส มีกลีบรูปเกือกม้า",
+            "detail_th": "กินแพลงก์ตอนสัตว์",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Aurelia_aurita.jpg",
+            "yt": "https://www.youtube.com/watch?v=6o7V9nN7o9U",
+            "note_th": "",
+            "summary_en": "โปร่งใส มีกลีบรูปเกือกม้า",
+            "detail_en": "กินแพลงก์ตอนสัตว์",
+            "note_en": ""
+        }, {
+            "id": 43,
+            "th": "แมงกะพรุนหงาย",
+            "en": "Upside-down jellyfish",
+            "sci": "Cassiopea andromeda",
+            "cat": "สัตว์น้ำทะเลอื่น ๆ",
+            "summary_th": "กลับหัวบนพื้น รับแสงให้สาหร่ายพึ่งพา",
+            "detail_th": "อยู่ลากูน/ป่าชายเลนเขตร้อน",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Cassiopea_andromeda_2.jpg",
+            "yt": "https://www.youtube.com/watch?v=CwDPEeA3QPw",
+            "note_th": "",
+            "summary_en": "กลับหัวบนพื้น รับแสงให้สาหร่ายพึ่งพา",
+            "detail_en": "อยู่ลากูน/ป่าชายเลนเขตร้อน",
+            "note_en": ""
+        }, {
+            "id": 44,
+            "th": "ปลาดาวคุกกี้",
+            "en": "Chocolate chip sea star",
+            "sci": "Protoreaster nodosus",
+            "cat": "สัตว์น้ำทะเลอื่น ๆ",
+            "summary_th": "ปลาดาวปุ่มคล้ายช็อคโกแลตชิพ",
+            "detail_th": "พบอินโด–แปซิฟิก น้ำตื้นทราย",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/7/70/Protoreaster_nodosus_2.jpg",
+            "yt": "https://www.youtube.com/watch?v=1m5ubH7C2pU",
+            "note_th": "",
+            "summary_en": "ปลาดาวปุ่มคล้ายช็อคโกแลตชิพ",
+            "detail_en": "พบอินโด–แปซิฟิก น้ำตื้นทราย",
+            "note_en": ""
+        }, {
+            "id": 45,
+            "th": "ปลิงกามาด",
+            "en": "Sandfish sea cucumber (likely)",
+            "sci": "Holothuria scabra",
+            "cat": "สัตว์น้ำทะเลอื่น ๆ",
+            "summary_th": "ปลิงทะเลเนื้อทราย เศรษฐกิจ",
+            "detail_th": "ชื่อท้องถิ่น ‘กามาด’ ต้องยืนยัน",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Holothuria_scabra.jpg",
+            "yt": "",
+            "note_th": "⚠️ ตรวจชื่อท้องถิ่น",
+            "summary_en": "ปลิงทะเลเนื้อทราย เศรษฐกิจ",
+            "detail_en": "ชื่อท้องถิ่น ‘กามาด’ ต้องยืนยัน",
+            "note_en": "⚠️ ตรวจชื่อท้องถิ่น"
+        }, {
+            "id": 46,
+            "th": "ปลิงขาว/ดำ",
+            "en": "Sea cucumber (white/black)",
+            "sci": "Holothuria leucospilota / H. atra",
+            "cat": "สัตว์น้ำทะเลอื่น ๆ",
+            "summary_th": "ปลิงทะเลพบชายฝั่งทั่วไป",
+            "detail_th": "มีบทบาทรีไซเคิลอินทรียวัตถุ",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Holothuria_leucospilota.jpg",
+            "yt": "https://www.youtube.com/watch?v=6Q3k5i4d8JQ",
+            "note_th": "",
+            "summary_en": "ปลิงทะเลพบชายฝั่งทั่วไป",
+            "detail_en": "มีบทบาทรีไซเคิลอินทรียวัตถุ",
+            "note_en": ""
+        }, {
+            "id": 47,
+            "th": "ตะพาบน้ำ",
+            "en": "Southeast Asian softshell turtle",
+            "sci": "Amyda cartilaginea",
+            "cat": "สัตว์เลื้อยคลานและสะเทินน้ำสะเทินบก",
+            "summary_th": "เต่ากระดองนิ่ม จมูกท่อ",
+            "detail_th": "อาศัยแม่น้ำ หนอง บึง น้ำไหลช้า",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/8/89/Amyda_cartilaginea.jpg",
+            "yt": "https://www.youtube.com/watch?v=KfQ1o4nOha8",
+            "note_th": "",
+            "summary_en": "เต่ากระดองนิ่ม จมูกท่อ",
+            "detail_en": "อาศัยแม่น้ำ หนอง บึง น้ำไหลช้า",
+            "note_en": ""
+        }, {
+            "id": 48,
+            "th": "แอกโซลอเติล",
+            "en": "Axolotl",
+            "sci": "Ambystoma mexicanum",
+            "cat": "สัตว์เลื้อยคลานและสะเทินน้ำสะเทินบก",
+            "summary_th": "คงสภาพวัยอ่อน เหงือกนอกรูปพู่",
+            "detail_th": "ถิ่นกำเนิดเม็กซิโก ใกล้สูญพันธุ์",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/4/49/Axolotl_ganz.jpg",
+            "yt": "https://www.youtube.com/watch?v=vaVQ1lD0OqI",
+            "note_th": "",
+            "summary_en": "คงสภาพวัยอ่อน เหงือกนอกรูปพู่",
+            "detail_en": "ถิ่นกำเนิดเม็กซิโก ใกล้สูญพันธุ์",
+            "note_en": ""
+        }, {
+            "id": 49,
+            "th": "ฉลามหูดำ",
+            "en": "Blacktip reef shark",
+            "sci": "Carcharhinus melanopterus",
+            "cat": "ปลากระดูกอ่อน",
+            "summary_th": "ฉลามรีฟครีบดำ",
+            "detail_th": "พบน้ำตื้นแนวปะการังอินโด–แปซิฟิก",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Blacktip_reef_shark.jpg",
+            "yt": "https://www.youtube.com/watch?v=YtB_G3oQW6I",
+            "note_th": "",
+            "summary_en": "ฉลามรีฟครีบดำ",
+            "detail_en": "พบน้ำตื้นแนวปะการังอินโด–แปซิฟิก",
+            "note_en": ""
+        }, {
+            "id": 50,
+            "th": "เฟิร์นรากดำใบแคป",
+            "en": "Java fern 'Narrow'",
+            "sci": "Microsorum pteropus 'Narrow'",
+            "cat": "พืชน้ำ",
+            "summary_th": "เฟิร์นใบแคบ เลี้ยงง่าย",
+            "detail_th": "ยึดติดหิน/ไม้ ไม่ต้องฝังดิน",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/7/79/Microsorum_pteropus.jpg",
+            "yt": "",
+            "note_th": "",
+            "summary_en": "เฟิร์นใบแคบ เลี้ยงง่าย",
+            "detail_en": "ยึดติดหิน/ไม้ ไม่ต้องฝังดิน",
+            "note_en": ""
+        }, {
+            "id": 51,
+            "th": "โรทาล่า โรราต้า",
+            "en": "Rotala rotundifolia",
+            "sci": "Rotala rotundifolia",
+            "cat": "พืชน้ำ",
+            "summary_th": "ไม้ก้านยอดนิยม สีชมพู–ส้ม",
+            "detail_th": "เติบโตเร็ว ต้องการแสงปานกลางขึ้นไป",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/1/11/Rotala_rotundifolia.jpg",
+            "yt": "",
+            "note_th": "",
+            "summary_en": "ไม้ก้านยอดนิยม สีชมพู–ส้ม",
+            "detail_en": "เติบโตเร็ว ต้องการแสงปานกลางขึ้นไป",
+            "note_en": ""
+        }, {
+            "id": 52,
+            "th": "โรทาล่า ทูลูเอนซิส",
+            "en": "Rotala tulunadensis",
+            "sci": "Rotala tulunadensis",
+            "cat": "พืชน้ำ",
+            "summary_th": "ใบเข็ม สีส้มแดงเมื่อแสงแรง",
+            "detail_th": "เหมาะกับตู้ไฮเทค เติม CO2 ฟอร์มแน่น",
+            "img_url": "",
+            "yt": "",
+            "note_th": "",
+            "summary_en": "ใบเข็ม สีส้มแดงเมื่อแสงแรง",
+            "detail_en": "เหมาะกับตู้ไฮเทค เติม CO2 ฟอร์มแน่น",
+            "note_en": ""
+        }, {
+            "id": 53,
+            "th": "ก้านธูปแดง",
+            "en": "Ammannia senegalensis",
+            "sci": "Ammannia senegalensis",
+            "cat": "พืชน้ำ",
+            "summary_th": "สีแดงส้มสด ใบรูปหอก",
+            "detail_th": "ต้องการแสงและ CO2 สูง",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Ammannia_senegalensis.jpg",
+            "yt": "",
+            "note_th": "",
+            "summary_en": "สีแดงส้มสด ใบรูปหอก",
+            "detail_en": "ต้องการแสงและ CO2 สูง",
+            "note_en": ""
+        }, {
+            "id": 54,
+            "th": "เนเรเก้มินิ",
+            "en": "Nesaea (trade name)",
+            "sci": "Nesaea pedicellata (cf.)",
+            "cat": "พืชน้ำ",
+            "summary_th": "ชื่อการค้าในไทย อาจหมายถึง Nesaea pedicellata",
+            "detail_th": "กรุณายืนยันสายพันธุ์จากผู้ขาย",
+            "img_url": "",
+            "yt": "",
+            "note_th": "⚠️ ต้องยืนยัน",
+            "summary_en": "ชื่อการค้าในไทย อาจหมายถึง Nesaea pedicellata",
+            "detail_en": "กรุณายืนยันสายพันธุ์จากผู้ขาย",
+            "note_en": "⚠️ ต้องยืนยัน"
+        }, {
+            "id": 55,
+            "th": "ลัดวิเจียพิโลซ่า",
+            "en": "Ludwigia pilosa",
+            "sci": "Ludwigia pilosa",
+            "cat": "พืชน้ำ",
+            "summary_th": "ใบฝอยส้มแดง ฟอร์มเด่น",
+            "detail_th": "ต้องการแสงและธาตุอาหารเพียงพอ",
+            "img_url": "",
+            "yt": "",
+            "note_th": "",
+            "summary_en": "ใบฝอยส้มแดง ฟอร์มเด่น",
+            "detail_en": "ต้องการแสงและธาตุอาหารเพียงพอ",
+            "note_en": ""
+        }, {
+            "id": 56,
+            "th": "ลัดวิเจียพาทาแนล",
+            "en": "Ludwigia ‘Pantanal’",
+            "sci": "Ludwigia inclinata var. verticillata 'Pantanal'",
+            "cat": "พืชน้ำ",
+            "summary_th": "ยอดส้มแดง พุ่มหนาแน่น",
+            "detail_th": "แสงแรง+CO2 ให้สีสวย",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Ludwigia_inclinata.jpg",
+            "yt": "",
+            "note_th": "",
+            "summary_en": "ยอดส้มแดง พุ่มหนาแน่น",
+            "detail_en": "แสงแรง+CO2 ให้สีสวย",
+            "note_en": ""
+        }, {
+            "id": 57,
+            "th": "คลิปเวนดี้กรีน",
+            "en": "Cryptocoryne wendtii 'Green'",
+            "sci": "Cryptocoryne wendtii",
+            "cat": "พืชน้ำ",
+            "summary_th": "ไม้น้ำทนทาน ใบเขียว",
+            "detail_th": "เหมาะผู้เริ่มต้น แสงต่ำ–กลาง",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/0/05/Cryptocoryne_wendtii.jpg",
+            "yt": "",
+            "note_th": "",
+            "summary_en": "ไม้น้ำทนทาน ใบเขียว",
+            "detail_en": "เหมาะผู้เริ่มต้น แสงต่ำ–กลาง",
+            "note_en": ""
+        }, {
+            "id": 58,
+            "th": "ลัดวิเจียเพเรนซิส",
+            "en": "Ludwigia perennis (needs confirm)",
+            "sci": "Ludwigia perennis",
+            "cat": "พืชน้ำ",
+            "summary_th": "ชื่อการค้าอาจสับสนกับ peruensis",
+            "detail_th": "กรุณายืนยันชื่อที่ใช้ในตลาดไทย",
+            "img_url": "",
+            "yt": "",
+            "note_th": "⚠️ ต้องยืนยัน",
+            "summary_en": "ชื่อการค้าอาจสับสนกับ peruensis",
+            "detail_en": "กรุณายืนยันชื่อที่ใช้ในตลาดไทย",
+            "note_en": "⚠️ ต้องยืนยัน"
+        }, {
+            "id": 59,
+            "th": "แฮร์กลาสมินิทวิส",
+            "en": "Hairgrass ‘Mini’",
+            "sci": "Eleocharis acicularis 'Mini'",
+            "cat": "พืชน้ำ",
+            "summary_th": "พืชคลุมพื้นใบเส้นเล็ก",
+            "detail_th": "ชอบแสงปานกลาง–แรง และ CO2",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/0/06/Eleocharis_acicularis.jpg",
+            "yt": "",
+            "note_th": "",
+            "summary_en": "พืชคลุมพื้นใบเส้นเล็ก",
+            "detail_en": "ชอบแสงปานกลาง–แรง และ CO2",
+            "note_en": ""
+        }, {
+            "id": 60,
+            "th": "กลอสโซติม่า",
+            "en": "Glossostigma",
+            "sci": "Glossostigma elatinoides",
+            "cat": "พืชน้ำ",
+            "summary_th": "คลุมพื้นยอดนิยม",
+            "detail_th": "ต้องแสงแรง+CO2 เพื่อเลื้อยแนบพื้น",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Glossostigma_elatinoides.jpg",
+            "yt": "",
+            "note_th": "",
+            "summary_en": "คลุมพื้นยอดนิยม",
+            "detail_en": "ต้องแสงแรง+CO2 เพื่อเลื้อยแนบพื้น",
+            "note_en": ""
+        }, {
+            "id": 61,
+            "th": "บาโคป้าม่วง",
+            "en": "Bacopa (turns purple)",
+            "sci": "Bacopa caroliniana",
+            "cat": "พืชน้ำ",
+            "summary_th": "ใบเขียวอมฟ้า เปลี่ยนม่วงในแสงแรง",
+            "detail_th": "ดูแลง่าย กลิ่นสมุนไพรอ่อน ๆ",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Bacopa_caroliniana.jpg",
+            "yt": "",
+            "note_th": "",
+            "summary_en": "ใบเขียวอมฟ้า เปลี่ยนม่วงในแสงแรง",
+            "detail_en": "ดูแลง่าย กลิ่นสมุนไพรอ่อน ๆ",
+            "note_en": ""
+        }, {
+            "id": 62,
+            "th": "โรทาล่า โคโรราต้า",
+            "en": "Rotala rotundifolia 'Colorata'",
+            "sci": "Rotala rotundifolia 'Colorata'",
+            "cat": "พืชน้ำ",
+            "summary_th": "สีชมพู–ส้มเข้มกว่าปกติ",
+            "detail_th": "ต้องการแสงปานกลาง–แรง",
+            "img_url": "",
+            "yt": "",
+            "note_th": "",
+            "summary_en": "สีชมพู–ส้มเข้มกว่าปกติ",
+            "detail_en": "ต้องการแสงปานกลาง–แรง",
+            "note_en": ""
+        }, {
+            "id": 63,
+            "th": "โรทาร่า (ไม่ระบุสาย)",
+            "en": "Rotala (unspecified)",
+            "sci": "Rotala sp.",
+            "cat": "พืชน้ำ",
+            "summary_th": "ชื่อกว้าง ต้องระบุสายพันธุ์",
+            "detail_th": "เช่น rotundifolia/indica/hippuroides ฯลฯ",
+            "img_url": "",
+            "yt": "",
+            "note_th": "⚠️ ระบุสายพันธุ์",
+            "summary_en": "ชื่อกว้าง ต้องระบุสายพันธุ์",
+            "detail_en": "เช่น rotundifolia/indica/hippuroides ฯลฯ",
+            "note_en": "⚠️ ระบุสายพันธุ์"
+        }, {
+            "id": 64,
+            "th": "คลิปเวนดี้บราว",
+            "en": "Cryptocoryne wendtii 'Brown'",
+            "sci": "Cryptocoryne wendtii",
+            "cat": "พืชน้ำ",
+            "summary_th": "ใบสีน้ำตาลแดง ทนทาน",
+            "detail_th": "เติบโตได้ในแสงต่ำ–กลาง",
+            "img_url": "",
+            "yt": "",
+            "note_th": "",
+            "summary_en": "ใบสีน้ำตาลแดง ทนทาน",
+            "detail_en": "เติบโตได้ในแสงต่ำ–กลาง",
+            "note_en": ""
+        }, {
+            "id": 65,
+            "th": "เฟิร์นรากดำ",
+            "en": "Java fern",
+            "sci": "Microsorum pteropus",
+            "cat": "พืชน้ำ",
+            "summary_th": "ไม้น้ำคลาสสิก ยึดติดไม้/หิน",
+            "detail_th": "ไม่ฝังเหง้าโดยตรงจะเน่า",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/7/79/Microsorum_pteropus.jpg",
+            "yt": "",
+            "note_th": "",
+            "summary_en": "ไม้น้ำคลาสสิก ยึดติดไม้/หิน",
+            "detail_en": "ไม่ฝังเหง้าโดยตรงจะเน่า",
+            "note_en": ""
+        }, {
+            "id": 66,
+            "th": "เฟิร์นโบบิทิส",
+            "en": "African water fern",
+            "sci": "Bolbitis heudelotii",
+            "cat": "พืชน้ำ",
+            "summary_th": "ใบโปร่งเขียวเข้ม ละมุน",
+            "detail_th": "ชอบกระแสน้ำและแสงปานกลาง",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Bolbitis_heudelotii.jpg",
+            "yt": "",
+            "note_th": "",
+            "summary_en": "ใบโปร่งเขียวเข้ม ละมุน",
+            "detail_en": "ชอบกระแสน้ำและแสงปานกลาง",
+            "note_en": ""
+        }, {
+            "id": 67,
+            "th": "บูเซป คีดาแกง",
+            "en": "Bucephalandra 'Kedagang'",
+            "sci": "Bucephalandra sp. 'Kedagang'",
+            "cat": "พืชน้ำ",
+            "summary_th": "ใบเรียวยาว สีเขียวเข้มมีประกาย",
+            "detail_th": "โตช้า ชอบน้ำไหลเอื่อย",
+            "img_url": "",
+            "yt": "",
+            "note_th": "",
+            "summary_en": "ใบเรียวยาว สีเขียวเข้มมีประกาย",
+            "detail_en": "โตช้า ชอบน้ำไหลเอื่อย",
+            "note_en": ""
+        }, {
+            "id": 68,
+            "th": "บูเซป บราวนี่",
+            "en": "Bucephalandra 'Brownie'",
+            "sci": "Bucephalandra sp. 'Brownie'",
+            "cat": "พืชน้ำ",
+            "summary_th": "ใบเข้มอมม่วง ปลายใบกลม",
+            "detail_th": "เหมาะผูกติดหิน/ไม้",
+            "img_url": "",
+            "yt": "",
+            "note_th": "",
+            "summary_en": "ใบเข้มอมม่วง ปลายใบกลม",
+            "detail_en": "เหมาะผูกติดหิน/ไม้",
+            "note_en": ""
+        }, {
+            "id": 69,
+            "th": "ใบตาข่าย",
+            "en": "Madagascar lace plant",
+            "sci": "Aponogeton madagascariensis",
+            "cat": "พืชน้ำ",
+            "summary_th": "ใบเป็นตาข่ายโปร่งงดงาม",
+            "detail_th": "ต้องน้ำเย็นสะอาด แสงปานกลาง",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Aponogeton_madagascariensis.jpg",
+            "yt": "",
+            "note_th": "",
+            "summary_en": "ใบเป็นตาข่ายโปร่งงดงาม",
+            "detail_en": "ต้องน้ำเย็นสะอาด แสงปานกลาง",
+            "note_en": ""
+        }, {
+            "id": 70,
+            "th": "หญ้าก้นหอยมินิ",
+            "en": "Monte Carlo / Dwarf baby tears (confirm)",
+            "sci": "Micranthemum tweediei 'Monte Carlo' / Hemianthus callitrichoides",
+            "cat": "พืชน้ำ",
+            "summary_th": "ชื่อไทยอาจใช้กับ 2 ชนิดยอดนิยม",
+            "detail_th": "โปรดยืนยันว่าเป็น Monte Carlo หรือ HC",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Micranthemum_tweediei.jpg",
+            "yt": "",
+            "note_th": "⚠️ ต้องยืนยัน",
+            "summary_en": "ชื่อไทยอาจใช้กับ 2 ชนิดยอดนิยม",
+            "detail_en": "โปรดยืนยันว่าเป็น Monte Carlo หรือ HC",
+            "note_en": "⚠️ ต้องยืนยัน"
+        }, {
+            "id": 71,
+            "th": "มาซิเลีย",
+            "en": "Water clover",
+            "sci": "Marsilea crenata / M. hirsuta",
+            "cat": "พืชน้ำ",
+            "summary_th": "ใบสี่แฉกเหมือนโคลเวอร์",
+            "detail_th": "เลี้ยงง่าย กระจายพันธุ์ด้วยไหล",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Marsilea_hirsuta.jpg",
+            "yt": "",
+            "note_th": "",
+            "summary_en": "ใบสี่แฉกเหมือนโคลเวอร์",
+            "detail_en": "เลี้ยงง่าย กระจายพันธุ์ด้วยไหล",
+            "note_en": ""
+        }, {
+            "id": 72,
+            "th": "บริกซ่า",
+            "en": "Blyxa japonica",
+            "sci": "Blyxa japonica",
+            "cat": "พืชน้ำ",
+            "summary_th": "ใบยาวเรียว ฟอร์มพุ่มเขียวสด",
+            "detail_th": "ต้องการแสงและธาตุอาหารเพียงพอ",
+            "img_url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Blyxa_japonica.jpg",
+            "yt": "",
+            "note_th": "",
+            "summary_en": "ใบยาวเรียว ฟอร์มพุ่มเขียวสด",
+            "detail_en": "ต้องการแสงและธาตุอาหารเพียงพอ",
+            "note_en": ""
+        }];
+
+        // i18n labels
+        let LANG = 'TH'; // TH or EN
+        const TXT = {
+            brand: {
+                TH: 'Songkhla AquaLife',
+                EN: 'Songkhla AquaLife'
+            },
+            badge: {
+                TH: 'QR • ออฟไลน์',
+                EN: 'QR • Offline'
+            },
+            search_ph: {
+                TH: 'ค้นหา: ไทย / อังกฤษ / วิทยาศาสตร์',
+                EN: 'Search: TH / EN / Scientific'
+            },
+            no_results: {
+                TH: 'ไม่พบรายการที่ตรงกับการค้นหา',
+                EN: 'No matching items found'
+            },
+            scan_title: {
+                TH: 'สแกนด้วยคิวอาร์ (QR) ได้เลย',
+                EN: 'Scan the QR to open'
+            },
+            scan_desc: {
+                TH: 'โฮสต์ไฟล์นี้แบบสแตติก (เช่น GitHub Pages / Netlify) แล้วสร้าง QR ชี้มา ยังใช้งานได้โดยไม่ต้องมีเซิร์ฟเวอร์หรือฐานข้อมูล',
+                EN: 'Host this file statically (e.g., GitHub Pages / Netlify) and point a QR to it—no server or database required.'
+            },
+            scan_hint: {
+                TH: 'เคล็ดลับ: เปิดใช้ Service Worker เพื่อแคชหน้าเว็บสำหรับใช้งานแบบออฟไลน์หลังจากเข้าใช้งานครั้งแรก',
+                EN: 'Tip: Enable the Service Worker to cache the page for offline after the first visit.'
+            },
+            tabs: [{
+                TH: 'หน้าแรก',
+                EN: 'Home'
+            }, {
+                TH: 'หมวดหมู่',
+                EN: 'Categories'
+            }, {
+                TH: 'ข้อมูลผู้เยี่ยมชม',
+                EN: 'Visitor Info'
+            }],
+            youtube_btn: {
+                TH: 'ดูวิดีโอ YouTube',
+                EN: 'Watch on YouTube'
+            },
+            category_label: {
+                TH: 'หมวดหมู่',
+                EN: 'Category'
+            },
+        };
+
+        // Language toggle
+        const langBtn = document.getElementById('langBtn');
+        const elQ = document.getElementById('q');
+
+        function applyLang() {
+            document.querySelector('[data-i18n="brand"]').textContent = TXT.brand[LANG];
+            document.querySelector('[data-i18n="badge"]').textContent = TXT.badge[LANG];
+            elQ.placeholder = TXT.search_ph[LANG];
+            document.getElementById('empty').textContent = TXT.no_results[LANG];
+            document.querySelector('[data-i18n="scan_title_th"]').textContent = TXT.scan_title[LANG];
+            document.querySelector('[data-i18n="scan_desc_th"]').textContent = TXT.scan_desc[LANG];
+            document.querySelector('[data-i18n="scan_hint_th"]').textContent = TXT.scan_hint[LANG];
+            const tabs = document.querySelectorAll('.tabs .tab');
+            tabs.forEach((t, i) => t.textContent = TXT.tabs[i][LANG]);
+            langBtn.textContent = (LANG === 'TH') ? 'EN' : 'TH';
+            renderChips();
+            renderGrid();
+        }
+        langBtn.addEventListener('click', () => {
+            LANG = (LANG === 'TH') ? 'EN' : 'TH';
+            applyLang();
+        });
+
+        // Build categories
+        const categories = Array.from(new Set(DATA.map(r => r.cat || 'อื่นๆ')));
+        const state = {
+            q: '',
+            cats: new Set()
+        };
+
+        const elChips = document.getElementById('chips');
+        const elGrid = document.getElementById('grid');
+        const elEmpty = document.getElementById('empty');
+        const sheet = document.getElementById('sheet');
+        const sheetImg = document.getElementById('sheetImg');
+        const sheetCat = document.getElementById('sheetCat');
+        const sheetName = document.getElementById('sheetName');
+        const sheetLatin = document.getElementById('sheetLatin');
+        const sheetSum = document.getElementById('sheetSum');
+        const videoWrap = document.getElementById('videoWrap');
+
+        function renderChips() {
+            elChips.innerHTML = '';
+            categories.forEach(c => {
+                const b = document.createElement('button');
+                b.className = 'chip' + (state.cats.has(c) ? ' active' : '');
+                b.textContent = c;
+                b.onclick = () => {
+                    toggleCat(c);
+                };
+                elChips.appendChild(b);
+            });
+        }
+
+        function toggleCat(c) {
+            state.cats.has(c) ? state.cats.delete(c) : state.cats.add(c);
+            renderChips();
+            renderGrid();
+        }
+
+        function matches(r, q) {
+            if (!q) return true;
+            const hay = [r.th, r.en, r.sci, r.summary_th, r.summary_en, r.cat].join(' ').toLowerCase();
+            return hay.includes(q.toLowerCase());
+        }
+
+        function renderGrid() {
+            const q = state.q.trim();
+            const inCats = [...state.cats];
+            const items = DATA.filter(r => (inCats.length === 0 || inCats.includes(r.cat)) && matches(r, q));
+            elGrid.innerHTML = '';
+            items.forEach(item => {
+                // Choose embedded placeholder for selected items, else fall back to external URL (online)
+                const offlineImg = item.img_embed || '';
+                const src = offlineImg || item.img_url || '';
+                const primary = (LANG === 'TH') ? (item.th || item.en) : (item.en || item.th);
+                const summary = (LANG === 'TH') ? (item.summary_th || '') : (item.summary_en || '');
+                const latin = (item.sci ? item.sci : '');
+                const card = document.createElement('article');
+                card.className = 'card';
+                card.innerHTML = `
+          <img class="thumb" src="${src}" alt="${primary}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'640\' height=\'360\'><rect width=\'100%\' height=\'100%\' fill=\'%23eaf6ff\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23606\' font-size=\'20\'>No Image</text></svg>'" />
+          <div class="pad">
+            <div class="cat">${item.cat || ''}</div>
+            <div class="name">${primary || ''}</div>
+            <div class="sum">${summary || ''}</div>
+            <div class="latin">${[LANG==='TH'? item.en : item.th, latin].filter(Boolean).join(' • ')}</div>
+          </div>
+        `;
+                card.onclick = () => openSheet(item);
+                elGrid.appendChild(card);
+            });
+            elEmpty.style.display = items.length ? 'none' : 'block';
+        }
+
+        function ytId(url) {
+            if (!url) return '';
+            try {
+                const u = new URL(url);
+                if (u.hostname.includes('youtu.be')) return u.pathname.slice(1);
+                if (u.searchParams.get('v')) return u.searchParams.get('v');
+            } catch (e) {
+                return '';
+            }
+            return '';
+        }
+
+        function openSheet(item) {
+            const src = item.img_embed || item.img_url || '';
+            sheetImg.src = src;
+            sheetImg.onerror = () => sheetImg.src = 'data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'640\' height=\'360\'><rect width=\'100%\' height=\'100%\' fill=\'%23eaf6ff\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23606\' font-size=\'20\'>No Image</text></svg>';
+            sheetCat.textContent = item.cat || '';
+            sheetName.textContent = (LANG === 'TH') ? (item.th || item.en) : (item.en || item.th);
+            sheetLatin.textContent = [(LANG === 'TH') ? item.en : item.th, item.sci].filter(Boolean).join(' • ');
+            sheetSum.textContent = (LANG === 'TH') ? (item.detail_th || item.summary_th || '') : (item.detail_en || item.summary_en || '');
+            const id = ytId(item.yt);
+            if (id) {
+                videoWrap.innerHTML = `<a class="btn" target="_blank" rel="noreferrer" href="${item.yt}">
+           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M8 7v10l9-5-9-5Z" fill="#0f172a"/></svg>
+           ${TXT.youtube_btn[LANG]}
+         </a>`;
+            } else videoWrap.innerHTML = '';
+            sheet.showModal();
+        }
+
+        function closeSheet() {
+            sheet.close();
+        }
+        window.closeSheet = closeSheet;
+
+        // Search wiring
+        document.getElementById('q').addEventListener('input', (e) => {
+            state.q = e.target.value;
+            renderGrid();
+        });
+
+        // Initial render
+        renderChips();
+        renderGrid();
+        applyLang();
+
+        // PWA: register service worker if hosted over HTTPS or localhost
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').catch(() => {});
+            });
+        }
+    </script>
+</body>
+
+</html>
