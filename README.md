@@ -1,1 +1,0 @@
-# aqualife2025.github.io
